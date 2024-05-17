@@ -1,0 +1,13 @@
+# other things to ignore
+.nextflow/
+docker_env_setup.txt
+
+
+# OneDrive specific
+.sync/
+.~lock.*
+~$*
+*.tmp
+.DS_Store
+Thumbs.db
+desktop.ini
