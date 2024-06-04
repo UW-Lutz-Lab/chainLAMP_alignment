@@ -28,6 +28,7 @@ process SortBamUnaligned {
     // --reads ${reads} \
     // --outfile_ext ${reads.baseName}_unaligned_sorted.bam
     // """
+    script:
     SortBam("${reads}", "${reads.baseName}_unaligned_sorted.bam")
 
 }
