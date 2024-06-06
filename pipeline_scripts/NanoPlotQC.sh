@@ -9,5 +9,5 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 mkdir -p ${out_dir}
-nanoplot --only-report -o ${out_dir} --${input_type} ${reads} 
+NanoPlot --only-report -o ${out_dir} --${input_type} ${reads} 
 
