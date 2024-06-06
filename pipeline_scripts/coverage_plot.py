@@ -26,7 +26,7 @@ import altair as alt
 
 
 # df = pd.read_csv(example)
-target_region_map = pd.read_csv("/Users/jason/Library/CloudStorage/OneDrive-UW/jason_rupp/nanopore/20240418_chainLAMP/ATJ329/target_region_map_updated.csv")
+target_region_map = pd.read_csv("target_region_map_updated.csv")
 
 # df.columns = ["reference", "seq_index", "coverage"]
 

@@ -14,7 +14,7 @@ process AlignReads {
 
     script:
     """
-    $workflow.projectDir/pipeline_scripts/alignReads.sh \
+    $workflow.projectDir/pipeline_scripts/AlignReads.sh \
     --reference ${ref} \
     --reads ${reads} \
     --output ${reads.baseName}_aligned.sam
