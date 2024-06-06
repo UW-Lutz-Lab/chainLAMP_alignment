@@ -66,6 +66,12 @@ unzip /opt/chopper/chopper-linux.zip -d /opt/chopper && \
 chmod +x /opt/chopper/chopper && \
 rm /opt/chopper/chopper-linux.zip
 
+# Install minimap2
+RUN cd /opt \
+&& curl -L https://github.com/lh3/minimap2/releases/download/v2.28/minimap2-2.28_x64-linux.tar.bz2 | tar -jxvf - \
+&& mv minimap2-2.28_x64-linux/minimap2 /opt/venv/bin/
+
+
 # # Add chopper to PATH
 # Add /opt/samtools/bin and /opt/bcftools/bin to PATH
 ENV PATH="/opt/chopper:/opt/samtools/bin:/opt/bcftools/bin:$PATH"
