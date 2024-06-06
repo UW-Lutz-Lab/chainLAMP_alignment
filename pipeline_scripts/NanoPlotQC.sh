@@ -9,5 +9,5 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 mkdir -p ${out_dir}
-/opt/miniconda3/envs/nanoqc/bin/nanoplot --only-report -o ${out_dir} --${input_type} ${reads} 
+nanoplot --only-report -o ${out_dir} --${input_type} ${reads} 
 

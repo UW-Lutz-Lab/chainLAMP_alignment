@@ -11,6 +11,13 @@ params.outdir = "${basename}_processed_results_q20_k7w3/"
 params.quality_filter = 20
 
 
+// include { SortBamUnaligned; SortBamAligned } from "./modules/SortBam.nf"
+// include { NanoPlotQC_Unaligned; NanoPlotQC_Aligned } from "./modules/NanoPlotQC.nf"
+// include { BamConvertQualFilter } from "./modules/BamConvertQualFilter.nf"
+// include { AlignReads } from "./modules/AlignReads.nf"
+// include { CoverageDepth } from "./modules/CoverageDepth.nf"
+// include { PlotCoverage } from "./modules/PlotCoverage.nf" 
+
 include { SortBamUnaligned; SortBamAligned } from "./modules/SortBam.nf"
 include { NanoPlotQC_Unaligned; NanoPlotQC_Aligned } from "./modules/NanoPlotQC.nf"
 include { BamConvertQualFilter } from "./modules/BamConvertQualFilter.nf"

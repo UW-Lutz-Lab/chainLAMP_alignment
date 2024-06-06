@@ -1,6 +1,12 @@
 # other things to ignore
 .nextflow/
 docker_env_setup.txt
+.nextflow.log*
+work/
+processed_results/
+*.png
+*.sh
+*.bam
 
 
 # OneDrive specific

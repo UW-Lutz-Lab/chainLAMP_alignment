@@ -50,7 +50,7 @@ process PlotCoverage {
         def baseName = coverage_csv.getBaseName() // Retrieves the filename without extension
         def plotName = baseName.split("-24_")[1].split("_f")[0] + "_coverage_plot"
         """
-        /opt/miniconda3/envs/nanoqc/bin/python ${PLOT_COVERAGE}\
+        python ${PLOT_COVERAGE}\
         --coverage_csv ${coverage_csv} \
         --plot_name ${coverage_csv.baseName.split('_f')[0]}_coverage_plot.html
         """
