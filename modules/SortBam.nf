@@ -22,7 +22,7 @@ process SortBamUnaligned {
     // """
     // samtools sort -o ${reads.baseName}_${outfile_name_ext}.bam ${reads}
     // """
-    // script:
+    script:
     // """
     // $workflow.projectDir/pipeline_scripts/SortBam.sh \
     // --reads ${reads} \
