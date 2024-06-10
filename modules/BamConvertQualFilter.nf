@@ -7,7 +7,6 @@ process BamConvertQualFilter {
 
     output:
     path "${reads.baseName}_f${quality_level}.fastq"
-    // file "${reads.baseName}_aligned.sam"
 
     publishDir "${params.outdir}", mode: 'copy'
 

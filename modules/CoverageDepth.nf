@@ -5,7 +5,6 @@ process CoverageDepth {
     path reads
 
     output:
-    // path "${reads.baseName}_sorted.bam"
     path "${reads.baseName}_coverage_report.csv"
 
     publishDir "${params.outdir}", mode: 'copy'

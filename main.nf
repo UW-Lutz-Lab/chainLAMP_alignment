@@ -3,10 +3,10 @@
 nextflow.enable.dsl=2
 
 params.reads = "$baseDir/data/*.fastq" 
-params.reference = "ref.fa"
+params.reference = "$workflow.projectDir/chainLamp_consensus.fasta"
 
 basename = file(params.reads).getName().split("\\.")[0] 
-params.outdir = "${basename}_processed_results_q20_k7w3/"
+params.outdir = "${basename}_processed_results/"
 
 params.quality_filter = 20
 

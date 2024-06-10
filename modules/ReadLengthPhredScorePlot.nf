@@ -1,6 +1,5 @@
 PLOT_READS = file("$workflow.projectDir/pipeline_scripts/ReadLengthPhredScorePlot.py")
 
-
 process ReadLengthPhredScorePlot {
     tag "QC-ing ${reads.baseName}"
 

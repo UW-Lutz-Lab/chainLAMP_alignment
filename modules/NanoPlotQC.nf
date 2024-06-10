@@ -8,8 +8,6 @@ def runNanoPlotQC(reads, out_dir, input_type) {
 }
 
 process NanoPlotQC_Unaligned {
-    // tag "NanoStats QC ${reads.baseName}"
-
     input:
     path reads
     val input_type
@@ -24,8 +22,6 @@ process NanoPlotQC_Unaligned {
 }
 
 process NanoPlotQC_Aligned {
-    // tag "NanoStats QC ${reads.baseName}"
-
     input:
     path reads
     val input_type

@@ -1,40 +1,6 @@
 
 PLOT_COVERAGE = file("$workflow.projectDir/pipeline_scripts/coverage_plot.py")
-
-
-// process PlotCoverage {
-//     // tag "Plotting ${reads}"
-
-//     input:
-//     file coverage_csv
-//     val plot_name
-        
-
-//     output:
-//     // path "${reads.baseName}_sorted.bam"
-//     path "${plot_name}"
-
-//     publishDir "${params.outdir}", mode: 'copy'
-
-
-
-    
-//     // script:
-//     // """
-//     // /opt/miniconda3/envs/nanoqc/bin/python ${PLOT_COVERAGE}\
-//     // --coverage_csv ${coverage_csv} \
-//     // --output ${plotName}_RLvPS_plot.html
-//     // """
-
-//     script:
-//         // def plotName = "${coverage_csv}".toString().split('_f')[0] + "_coverage_plot"    
-//     """
-//     /opt/miniconda3/envs/nanoqc/bin/python ${PLOT_COVERAGE}\
-//     --coverage_csv ${coverage_csv} \
-//     --plot_name ${plotName}
-//     """
-
-// }
+TARGET_REGION_CSV = file("$workflow.projectDir/pipeline_scripts/target_region_map_updated.csv")"
 
 process PlotCoverage {
     input:
@@ -52,6 +18,7 @@ process PlotCoverage {
         """
         python ${PLOT_COVERAGE}\
         --coverage_csv ${coverage_csv} \
-        --plot_name ${coverage_csv.baseName.split('_f')[0]}_coverage_plot.html
+        --plot_name ${coverage_csv.baseName.split('_f')[0]}_coverage_plot.html \
+        --target_region_csv ${TARGET_REGION_CSV}
         """
 }

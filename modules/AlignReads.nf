@@ -4,11 +4,9 @@ process AlignReads {
     input:
     path reads
     path ref
-    // val quality_level
 
     output:
     path "${reads.baseName}_aligned.sam"
-    // file "${reads.baseName}_aligned.sam"
 
     publishDir "${params.outdir}", mode: 'copy'
 
