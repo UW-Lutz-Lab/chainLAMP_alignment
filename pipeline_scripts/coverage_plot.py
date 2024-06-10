@@ -5,7 +5,9 @@ import pandas as pd
 import altair as alt
 
 
-target_region_map = pd.read_csv("/mnt/pipeline_scripts/target_region_map_updated.csv")
+# target_region_map = pd.read_csv("/mnt/pipeline_scripts/target_region_map_updated.csv")
+
+global target_region_map
 
 
 def yrule_for_rate_plot(target, size, color="black"):
@@ -120,6 +122,7 @@ def main():
         coverage_df.columns = ["reference", "seq_index", "coverage"]
         coverage_chart = coverage_area_chart(coverage_df, args.plot_name)
         coverage_chart.save(args.plot_name)
+        target_region_map = pd.read_csv(args.target_region_csv)
 
 
     except argparse.ArgumentError as e:
