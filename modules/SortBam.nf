@@ -7,28 +7,33 @@ def SortBam(reads, outfile_name) {
 }
 
 process SortBamUnaligned {
+
     input:
-    path reads
+    val read
 
     output:
-    path "${reads.baseName}_unaligned_sorted.bam"
+    path "${read.alias}_unaligned_sorted.bam"
+    val read.alias 
+    val read.reference 
 
-    publishDir "${params.outdir}", mode: 'copy'
+    publishDir "${read.alias}", mode: 'copy'
 
     script:
-    SortBam("${reads}", "${reads.baseName}_unaligned_sorted.bam")
+    SortBam("${read.filepath}", "${read.alias}_unaligned_sorted.bam")
 
 }
 
 process SortBamAligned {
     input:
-    path reads
+    path read
+    val read_alias
 
     output:
-    path "${reads.baseName}_sorted.bam"
+    path "${read_alias}_sorted.bam"
+    val read_alias
 
-    publishDir "${params.outdir}", mode: 'copy'
+    publishDir "${read_alias}", mode: 'copy'
 
     script:
-    SortBam("${reads}", "${reads.baseName}_sorted.bam")
+    SortBam("${read}", "${read_alias}_sorted.bam")
 }

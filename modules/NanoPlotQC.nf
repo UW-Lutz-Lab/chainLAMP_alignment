@@ -8,28 +8,34 @@ def runNanoPlotQC(reads, out_dir, input_type) {
 }
 
 process NanoPlotQC_Unaligned {
+    tag "NanoStats QC ${reads.baseName}"
+
     input:
     path reads
-    val input_type
+    val input_type // --ubam
+    val read_alias
 
     output:
     path "${reads.baseName}_qc"
 
-    publishDir "${params.outdir}", mode: 'copy'
+    publishDir "${read_alias}", mode: 'copy'
 
     script:
     runNanoPlotQC(reads, "${reads.baseName}", input_type) 
 }
 
 process NanoPlotQC_Aligned {
+    tag "NanoStats QC ${reads.baseName}"
+
     input:
     path reads
-    val input_type
+    val input_type // --bam
+    val read_alias
 
     output:
     path "${reads.baseName}_qc"
 
-    publishDir "${params.outdir}", mode: 'copy'
+    publishDir "${read_alias}", mode: 'copy'
 
     script:
     runNanoPlotQC(reads, "${reads.baseName}", input_type) 

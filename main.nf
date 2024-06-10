@@ -10,8 +10,6 @@ params.reads = "$baseDir/data/*.fastq"
 
 // params.outdir = "./processed_results/"
 
-params.quality_filter = 20
-
 include { SortBamUnaligned; SortBamAligned } from "./modules/SortBam.nf"
 include { NanoPlotQC_Unaligned; NanoPlotQC_Aligned } from "./modules/NanoPlotQC.nf"
 include { BamConvertQualFilter } from "./modules/BamConvertQualFilter.nf"
@@ -20,18 +18,64 @@ include { CoverageDepth } from "./modules/CoverageDepth.nf"
 include { PlotCoverage } from "./modules/PlotCoverage.nf" 
 
 
+// Read and parse the CSV file
+samples = file(params.samplesheet)
+
+def sample_data = []
+samples.withReader { reader ->
+    reader.readLine() // Skip the header
+    reader.eachLine { line ->
+        def fields = line.split(',')
+        def alias = fields[0]
+        def filepath = "${params.base_dir}/${fields[1]}"
+        sample_data << [ alias: alias, filepath: filepath, reference: params.reference ]
+    }
+}
+
+process CreateOutdir {
+    input:
+    val read
+
+    script:
+    """
+    mkdir -p \"${read.alias}\"
+    """
+}
+
 workflow {
 
-    reads_ch = Channel.fromPath(params.reads)
+    Channel
+        .from( sample_data )
+        .set { bam_channel }
+
     ref_ch = Channel.fromPath(params.reference)
 
-    unaligned_sorted_reads = SortBamUnaligned(reads_ch)
-    NanoPlotQC_Unaligned(unaligned_sorted_reads, "ubam")
-    filtered_fastq = BamConvertQualFilter(reads_ch, params.quality_filter)
-    aligned_reads = AlignReads(filtered_fastq, ref_ch)
-    aligned_sorted_reads = SortBamAligned(aligned_reads)
-    NanoPlotQC_Aligned(aligned_sorted_reads, "bam")
-    read_depth = CoverageDepth(aligned_sorted_reads)
+
+    CreateOutdir(bam_channel)
+
+    unaligned_sorted_reads = SortBamUnaligned(bam_channel)
+
+    NanoPlotQC_Unaligned(
+        unaligned_sorted_reads[0], 
+        "ubam", 
+        unaligned_sorted_reads[1])
+    
+    filtered_fastq = BamConvertQualFilter(
+        unaligned_sorted_reads[0],
+        params.quality_filter,
+        params.minlength,
+        params.maxlength,
+        unaligned_sorted_reads[1],
+        unaligned_sorted_reads[2])
+
+    aligned_reads = AlignReads(
+        filtered_fastq[0], 
+        filtered_fastq[2],
+        filtered_fastq[1])
+    // aligned_sorted_reads = SortBamAligned(aligned_reads)
+    aligned_sorted_reads = SortBamAligned(aligned_reads[0], aligned_reads[1])
+    NanoPlotQC_Aligned(aligned_sorted_reads[0], "bam", aligned_sorted_reads[1])
+    read_depth = CoverageDepth(aligned_sorted_reads[0], aligned_sorted_reads[1])
     PlotCoverage(read_depth)
 
 }

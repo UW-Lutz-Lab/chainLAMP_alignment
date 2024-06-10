@@ -3,19 +3,28 @@ process BamConvertQualFilter {
 
     input:
     path reads
+    // val reads
     val quality_level
+    val minlength
+    val maxlength
+    val read_alias
+    val reference
 
     output:
-    path "${reads.baseName}_f${quality_level}.fastq"
+    path "${read_alias}_f${quality_level}.fastq"
+    val read_alias 
+    val reference
+    // file "${reads.baseName}_aligned.sam"
 
-    publishDir "${params.outdir}", mode: 'copy'
+    publishDir "${read_alias}", mode: 'copy'
 
     script:
     """
-    mkdir -p ${params.outdir}
     $workflow.projectDir/pipeline_scripts/BamConvertQualFilter.sh \
     --quality_filter ${quality_level} \
     --reads ${reads} \
-    --output ${reads.baseName}_f${quality_level}.fastq
+    --minlength ${minlength} \
+    --maxlength ${maxlength} \
+    --output ${read_alias}_f${quality_level}.fastq
     """
 }
