@@ -1,6 +1,6 @@
 
-PLOT_COVERAGE = file("$workflow.projectDir/pipeline_scripts/coverage_plot.py")
-TARGET_REGION_CSV = file("$workflow.projectDir/pipeline_scripts/target_region_map_updated.csv")
+PLOT_COVERAGE = file("${workflow.projectDir}/pipeline_scripts/coverage_plot.py")
+TARGET_REGION_CSV = file("${workflow.projectDir}/pipeline_scripts/target_region_map_updated.csv")
 
 process PlotCoverage {
     input:
