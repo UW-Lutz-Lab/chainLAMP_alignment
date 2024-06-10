@@ -3,20 +3,14 @@
 nextflow.enable.dsl=2
 
 params.reads = "$baseDir/data/*.fastq" 
-params.reference = "ref.fa"
+params.reference = "./chainLamp_consensus.fasta"
 
-basename = file(params.reads).getName().split("\\.")[0] 
-params.outdir = "${basename}_processed_results/"
+// basename = file(params.reads).getName().split("\\.")[0] 
+// params.outdir = "${basename}_processed_results/"
+
+params.outdir = "./processed_results/"
 
 params.quality_filter = 20
-
-
-// include { SortBamUnaligned; SortBamAligned } from "./modules/SortBam.nf"
-// include { NanoPlotQC_Unaligned; NanoPlotQC_Aligned } from "./modules/NanoPlotQC.nf"
-// include { BamConvertQualFilter } from "./modules/BamConvertQualFilter.nf"
-// include { AlignReads } from "./modules/AlignReads.nf"
-// include { CoverageDepth } from "./modules/CoverageDepth.nf"
-// include { PlotCoverage } from "./modules/PlotCoverage.nf" 
 
 include { SortBamUnaligned; SortBamAligned } from "./modules/SortBam.nf"
 include { NanoPlotQC_Unaligned; NanoPlotQC_Aligned } from "./modules/NanoPlotQC.nf"
