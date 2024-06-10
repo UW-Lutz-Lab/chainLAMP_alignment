@@ -28,8 +28,8 @@ mkdir processed_results
 
 ```
 docker run -it -v "${PWD}:/mnt" chainlamp_pipeline nextflow run mcgrupp3/chainLAMP_alignment_pipeline \
-    --reads "${BAM_FILE}" \
-    --outdir "./processed_results/${BASENAME}/" \
+    --reads <Reads Filepath> \
+    --outdir "./processed_results/<Desired Output Folder Name>/" \
     -r "main"
 ```
 
