@@ -3,7 +3,7 @@
 nextflow.enable.dsl=2
 
 params.reads = "$baseDir/data/*.fastq" 
-params.reference = "$workflow.projectDir/chainLamp_consensus.fasta"
+params.reference = "$baseDir/chainLamp_consensus.fasta"
 
 basename = file(params.reads).getName().split("\\.")[0] 
 params.outdir = "${basename}_processed_results/"
