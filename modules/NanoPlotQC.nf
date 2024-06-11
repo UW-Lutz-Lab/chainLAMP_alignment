@@ -25,6 +25,7 @@ process NanoPlotQC_Unaligned {
 }
 
 process NanoPlotQC_Aligned {
+    errorStrategy 'ignore'
     tag "NanoStats QC ${reads.baseName}"
 
     input:
