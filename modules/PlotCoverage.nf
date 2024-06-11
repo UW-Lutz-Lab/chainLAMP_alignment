@@ -11,7 +11,7 @@ process PlotCoverage {
         // path "${plotName}_RLvPS_plot.html"
         path "${read_alias}_coverage_plot.html"
         
-        publishDir "${read_alias}", mode: 'copy'
+        publishDir "${params.outdir}/${read_alias}", mode: 'copy'
 
     script:
         // def baseName = coverage_csv.getBaseName() // Retrieves the filename without extension
