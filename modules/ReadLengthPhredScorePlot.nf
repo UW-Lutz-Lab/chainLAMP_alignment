@@ -10,7 +10,7 @@ process ReadLengthPhredScorePlot {
     path "${reads.baseName}_RLvPS_plot.html"
     // file "${reads.baseName}_aligned.sam"
 
-    publishDir "${params.outdir}", mode: 'copy'
+    publishDir "${params.outdir}/${params.outdir}", mode: 'copy'
 
     script:
     """

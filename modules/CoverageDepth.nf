@@ -8,7 +8,7 @@ process CoverageDepth {
     output:
     path "${read_alias}_coverage_report.csv"
 
-    publishDir "${read_alias}", mode: 'copy'
+    publishDir "${params.outdir}/${read_alias}", mode: 'copy'
 
     script:
     """
