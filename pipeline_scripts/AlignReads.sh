@@ -1,3 +1,21 @@
+# #!/bin/bash
+# set -e
+# # Usage: ./AlignReads.sh --reference <reference> --reads <reads> --output <output sam file>
+
+# while [[ "$#" -gt 0 ]]; do
+#     case $1 in
+#         --reference) reference="$2"; shift ;;
+#         --reads) reads="$2"; shift ;;
+#         --output) output="$2"; shift ;;
+#         # --quality_filter) quality_filter="$2"; shift;;
+#         *) echo "Unknown parameter passed: $1"; exit 1 ;;
+#     esac
+#     shift
+# done
+
+
+
+# minimap2 -k 7 -w 3 -ax sr "$reference" "$reads" > "$output"
 #!/bin/bash
 set -e
 # Usage: ./AlignReads.sh --reference <reference> --reads <reads> --output <output sam file>
@@ -7,12 +25,12 @@ while [[ "$#" -gt 0 ]]; do
         --reference) reference="$2"; shift ;;
         --reads) reads="$2"; shift ;;
         --output) output="$2"; shift ;;
+        --k) k="$2"; shift ;;
+        --w) w="$2"; shift ;;
         # --quality_filter) quality_filter="$2"; shift;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
 done
 
-
-
-minimap2 -k 7 -w 3 -ax sr "$reference" "$reads" > "$output"
+minimap2 -k "$k" -w "$w" -ax sr "$reference" "$reads" > "$output"
