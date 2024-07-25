@@ -77,9 +77,10 @@ workflow {
         filtered_fastq[1])
     // aligned_sorted_reads = SortBamAligned(aligned_reads)
     aligned_sorted_reads = SortBamAligned(aligned_reads[0], aligned_reads[1])
-    '''
+    
     NanoPlotQC_Aligned(aligned_sorted_reads[0], "bam", aligned_sorted_reads[1])
     read_depth = CoverageDepth(aligned_sorted_reads[0], aligned_sorted_reads[1])
+    '''
     PlotCoverage(read_depth, aligned_sorted_reads[1])
     '''
 }
